@@ -9,7 +9,7 @@ on:
 env:
   MANIFEST: git://gitlab.com/OrangeFox/Manifest.git -b fox_9.0
   DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/android_device_xiaomi_phoenix
+  DT_LINK: https://github.com/GtrCraft/twrp_device_xiaomi_phoenix
   DT_PATH: device/xiaomi/phoenix
   KERNEL_LINK: https://github.com/sm6150-dev/android_kernel_xiaomi_sm6150
   KERNEL_PATH: kernel/xiaomi/phoenix
@@ -56,4 +56,4 @@ jobs:
          run: |
               cd work/out/target/product/$DEVICE
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet OrangeFox-unofficial-.img    
+              ./transfer wet OrangeFox-unofficial-phoenix.img    
