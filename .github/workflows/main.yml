@@ -18,7 +18,6 @@ on:
 env:
   KERNEL_LINK: https://github.com/hraj9258/kernel_phoenix_test
   KERNEL_PATH: phoenix
-  TARGET: recoveryimage
   TZ: Asia/Kolkata
 
 jobs:
