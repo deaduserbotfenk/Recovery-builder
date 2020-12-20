@@ -51,8 +51,9 @@ jobs:
              
        - name: Build
          run: |
-              cd work
-              . build/envsetup.sh &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              cd work/phoenix
+              chmode +x build.sh
+              ./build.sh
              
        - name: Upload recovery image
          run: |
