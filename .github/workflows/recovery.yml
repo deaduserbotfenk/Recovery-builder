@@ -39,7 +39,9 @@ jobs:
          run: |
              mkdir work
              cd work
-             rsync rsync://sources.orangefox.download/sources/fox_10.0 . --progress -a -j4
+             git clone git@gitlab.com:OrangeFox/sync.git
+             cd work/sync
+             ./get_fox_10.sh work/manifest
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              
        - name: Build
