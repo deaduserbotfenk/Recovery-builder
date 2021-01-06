@@ -17,9 +17,9 @@ on:
 
 env:
   MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0
-  DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/android_device_xiaomi_phoenix
-  DT_PATH: device/xiaomi/phoenix
+  DEVICE: phoenixin
+  DT_LINK: https://github.com/hraj9258/twrp_phoenix
+  DT_PATH: device/xiaomi/phoenixin
   TARGET: recoveryimage
   TZ: Asia/Kolkata
 
