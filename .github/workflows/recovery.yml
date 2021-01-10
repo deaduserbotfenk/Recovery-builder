@@ -65,3 +65,5 @@ jobs:
               curl -sL https://git.io/file-transfer | sh
               ./transfer wet SHRP-phoenix.zip
               ./transfer wet recovery.img
+              ./transfer wet SHRP_phoenix.zip
+              ./transfer wet *.img
