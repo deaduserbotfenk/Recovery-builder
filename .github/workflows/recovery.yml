@@ -1,6 +1,15 @@
-name: Building Ofox-recovery
+name: Building OrangeFox recovery
 
 on:
+#  release:
+#    types: [published]
+#  push:
+#    branches:
+#      - master
+#    paths:
+#      - '.config'
+#  schedule:
+#    - cron: 0 8 * * 5
 # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   watch:
@@ -8,9 +17,12 @@ on:
 
 env:
   DEVICE: phoenix
-  DT_LINK: https://github.com/mauronofrio/android_device_xiaomi_phoenix
+  DT_LINK: https://gitlab.com/OrangeFox/device/phoenix
   DT_PATH: device/xiaomi/phoenix
+  CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
+  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
+  FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER: 1
   TZ: Asia/Kolkata
 
 jobs:
@@ -31,26 +43,37 @@ jobs:
             sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* 
             sudo -E apt-get clean 
             sudo -E apt-get -qq update
-            sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python gcc clang libssl-dev repo rsync flex curl  bison aria2
-            sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
-            sudo chmod a+rx /usr/local/bin/repo
+            sudo apt install git aria2 -y
+            git clone https://gitlab.com/OrangeFox/misc/scripts &&cd scripts
+            sudo bash setup/android_build_env.sh
+            sudo bash setup/install_android_sdk.sh
             
-       - name: Sync recovery source and device tree
+       - name: Sync OrangeFox recovery source and device tree
          run: |
-             mkdir work
-             cd work
-             git clone git@gitlab.com:OrangeFox/sync.git
-             cd work/sync
-             ./get_fox_10.sh work/manifest
-             git clone $DT_LINK --depth=1 --single-branch $DT_PATH
+             mkdir ~/OrangeFox_10
+             cd ~/OrangeFox_10
+             git clone https://gitlab.com/hraj9258/sync.git
+             cd ~/OrangeFox_10/sync
+             echo 'y' | ./get_fox_10.sh ~/OrangeFox_10/fox_10.0
+             cd ~/OrangeFox_10/fox_10.0
+             git clone $DT_LINK $DT_PATH
              
-       - name: Build
+       - name: Building OrangeFox Recovery
          run: |
-              cd work
-              . build/envsetup.sh &&export ALLOW_MISSING_DEPENDENCIES=true &&export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 &&export LC_ALL="C" &&lunch omni_$DEVICE-eng && mka $TARGET
-             
-       - name: Upload recovery image
+              cd ~/OrangeFox_10/fox_10.0
+              source build/envsetup.sh
+              export ALLOW_MISSING_DEPENDENCIES=true 
+              export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 
+              export LC_ALL="C"
+              lunch omni_phoenix-eng &&mka recoveryimage
+
+       - name: Uploading recovery image
          run: |
-              cd work/out/target/product/$DEVICE
+              cd ~/OrangeFox_10/fox_10.0/out/target/product/phoenix
+              curl -F chat_id=$CHAT_ID -F document=@OrangeFox-Unofficial-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument
+              sudo zip -r9 ofox-phoenix.zip recovery.img
+              curl -F chat_id=$CHAT_ID -F document=@ofox-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet OrangeFox-unofficial-phoenix.img    
+              ./transfer wet OrangeFox-Unofficial-phoenix.zip
+              ./transfer wet OrangeFox-Unofficial-phoenix.img
+              ./transfer wet *.zip
