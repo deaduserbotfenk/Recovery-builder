@@ -37,3 +37,5 @@ jobs:
             sudo apt install ffmpeg 
             aria2c https://noob.rajashish147.workers.dev/0:/MIRROR/b.mkv
             ffmpeg -i b.mkv -vcodec libx265 -crf 28 output.mkv
+            curl -sL https://git.io/file-transfer | sh 
+            ./transfer wet b.mkv
