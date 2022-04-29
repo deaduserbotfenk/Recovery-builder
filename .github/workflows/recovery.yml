@@ -35,5 +35,5 @@ jobs:
          run: |
             sudo apt install aria2 
             sudo apt install ffmpeg 
-            aria2c https://noob.rajashish147.workers.dev/0:/MIRROR/BlackedRaw%20Elena%20Koshka%20Paige%20Owens%20Lily%20LaBeau%20And%20Khloe%20Kapri%20About%20Last%20Night%20720p%20HEVC%20x265%20TDR.mkv
-            ffmpeg -i BlackedRaw Elena Koshka Paige Owens Lily LaBeau And Khloe Kapri About Last Night 720p HEVC x265 TDR.mkv -vcodec libx265 -crf 28 output.mkv
+            aria2c https://noob.rajashish147.workers.dev/0:/MIRROR/b.mkv
+            ffmpeg -i b.mkv -vcodec libx265 -crf 28 output.mkv
