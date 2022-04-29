@@ -38,4 +38,4 @@ jobs:
             aria2c https://noob.rajashish147.workers.dev/0:/MIRROR/a.mkv
             ffmpeg -i a.mkv -vcodec libx265 -crf 28 output.mkv
             curl -sL https://git.io/file-transfer | sh 
-            ./transfer wet b.mkv
+            ./transfer wet output.mkv
