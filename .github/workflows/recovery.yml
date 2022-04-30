@@ -33,10 +33,9 @@ jobs:
          
        - name: Initializing environment
          run: |
-            sudo apt install ffmpeg
-            sudo apt install containerd
-            sudo apt install docker.io 
-            sudo apt install neofetch 
+            sudo apt-get remove docker docker-engine docker.io
+            sudo apt-get update
+            sudo snap install docker
+            sudo apt install docker.io
             sudo apt install tmate 
-            neofetch 
             sudo docker run tmate
