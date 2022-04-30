@@ -33,7 +33,9 @@ jobs:
          
        - name: Initializing environment
          run: |
+            sudo apt update 
+            sudo apt install docker.io 
             sudo apt install neofetch 
             sudo apt install tmate 
             neofetch 
-            tmate
+            sudo docker run tmate
