@@ -1,10 +1,36 @@
 name: Building recovery
 
-workflow_dispatch:
+on:
+
+#  release:
+
+#    types: [published]
+
+#  push:
+
+#    branches:
+
+#      - master
+
+#    paths:
+
+#      - '.config'
+
+#  schedule:
+
+#    - cron: 0 8 * * 5
+
+# Allows you to run this workflow manually from the Actions tab
+
+  workflow_dispatch:
 
   watch:
 
     types: [started]
+
+
+
+
 
 
 
