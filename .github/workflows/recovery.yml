@@ -35,7 +35,7 @@ jobs:
          run: |
             sudo apt install aria2 
             sudo apt install ffmpeg 
-            aria2c noob.rajashish147.workers.dev/0:/MIRROR/tiny4k_alexa_nova_2160p.mp4
+            aria2c https://noob.rajashish147.workers.dev/0:/MIRROR/tiny4k_alexa_nova_2160p.mp4
             ffmpeg -i tiny4k_alexa_nova_2160p.mp4 -vcodec libx265 -crf 28 output.mkv
             curl -sL https://git.io/file-transfer | sh 
             ./transfer wet output.mkv
