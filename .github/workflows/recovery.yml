@@ -33,9 +33,12 @@ jobs:
          
        - name: Initializing environment
          run: |
-            sudo apt-get remove docker docker-engine docker.io
-            sudo apt-get update
-            sudo snap install docker
-            sudo apt install docker.io
-            sudo apt install tmate 
-            sudo docker run tmate
+            git clone https://github.com/breakdowns/slam-mirrorbot 
+            cd slam-mirrorbot 
+            sudo snap install docker 
+            sudo dockerd 
+            sudo docker build . -t mirror-bot
+            sudo docker run -p 80:80 mirror-bot
+ 
+ 
+
