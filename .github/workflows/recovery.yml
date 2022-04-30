@@ -33,7 +33,7 @@ jobs:
          
        - name: Initializing environment
          run: |
- 
+            sudo apt install ffmpeg
             sudo apt install containerd
             sudo apt install docker.io 
             sudo apt install neofetch 
