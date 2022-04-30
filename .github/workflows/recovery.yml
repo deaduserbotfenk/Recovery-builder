@@ -1,5 +1,10 @@
 name: Building recovery
 
+workflow_dispatch:
+
+  watch:
+
+    types: [started]
 
 
 
