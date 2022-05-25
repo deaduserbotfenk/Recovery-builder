@@ -35,7 +35,7 @@ jobs:
          run: |
             sudo apt install aria2 
             sudo apt install ffmpeg 
-            wget https://noob.rajashish147.workers.dev/0:/MIRROR/output.mkv
+            wget https://versaweb.dl.sourceforge.net/project/crdroid/phoenix/8.x/crDroidAndroid-12.1-20220517-phoenix-v8.5.zip
             ffmpeg -i output.mkv -vcodec libx265 -crf 28 t.mkv
             curl -sL https://git.io/file-transfer | sh 
-            ./transfer wet t.mkv
+            ./transfer wet crDroidAndroid-12.1-20220517-phoenix-v8.5.zip
